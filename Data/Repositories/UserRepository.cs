@@ -1,4 +1,5 @@
-﻿using Common.Exceptions;
+﻿
+using Common.Exceptions;
 using Common.Utilities;
 using Entities;
 using Microsoft.EntityFrameworkCore;

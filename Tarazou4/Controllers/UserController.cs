@@ -1,5 +1,6 @@
 ﻿using Data.Repositories;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -11,11 +12,13 @@ using WebFramework.Filters;
 
 namespace Tarazou4.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiResultFilter]
     [ApiController]
     public class UserController : ControllerBase
     {
+
         private readonly IUserRepository userRepository;
 
         public UserController(IUserRepository userRepository)
@@ -49,6 +52,7 @@ namespace Tarazou4.Controllers
             var user = new User
             {
                 Guid = userDto.Guid,
+                Username=userDto.Username,
                 FirstName = userDto.FirstName,
                 Mobile = userDto.Mobile,
                 MobileVerificationCode = userDto.MobileVerificationCode,

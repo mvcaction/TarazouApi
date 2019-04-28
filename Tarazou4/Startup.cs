@@ -18,6 +18,7 @@ using Services;
 using Tarazou4.Entities;
 using Tarazou4.Data;
 
+
 namespace Tarazou4
 {
     public class Startup
@@ -41,6 +42,8 @@ namespace Tarazou4
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+
             services.AddScoped<IJwtService, JwtService>();
         }
 
