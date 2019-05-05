@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Tarazou4.Entities.Question>
+
+@{
+    ViewData["Title"] = "Index";
+}
+    <head>
+  
+
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    </head>
+
+<h2>Index</h2>
+<select>
+    @foreach (var item in (List<Tarazou4.Entities.QuestionCategory>)ViewData["heading"])
+    {
+
+<option>@item.Name</option>
+
+    }
+    </select>

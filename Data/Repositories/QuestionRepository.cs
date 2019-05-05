@@ -43,5 +43,12 @@ namespace Data.Repositories
            
             await base.AddAsync(question, cancellationToken);
         }
+        public async Task GetQuestionById(Question question, CancellationToken cancellationToken)
+        {
+
+
+            await base.AddAsync(question, cancellationToken);
+        }
+
     }
 }

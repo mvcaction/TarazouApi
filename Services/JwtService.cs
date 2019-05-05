@@ -17,7 +17,7 @@ namespace Services
     public class JwtService : IJwtService
     {
         private readonly SiteSettings _siteSetting;
-        private readonly SignInManager<Tarazou4.Entities.User> signInManager;
+        private readonly SignInManager<User> signInManager;
 
         public JwtService(IOptionsSnapshot<SiteSettings> settings, SignInManager<User> signInManager)
         {
@@ -65,6 +65,37 @@ namespace Services
             return jwt;
         }
 
+       async Task<string> IJwtService.GenerateAsync(User user)
+        {
+            var secretKey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.SecretKey); // longer that 16 character
+            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
+
+            var encryptionkey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.Encryptkey); //must be 16 character
+            var encryptingCredentials = new EncryptingCredentials(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
+
+            var claims = await _getClaimsAsync(user);
+
+            var descriptor = new SecurityTokenDescriptor
+            {
+                Issuer = _siteSetting.JwtSettings.Issuer,
+                Audience = _siteSetting.JwtSettings.Audience,
+                IssuedAt = DateTime.Now,
+                NotBefore = DateTime.Now.AddMinutes(_siteSetting.JwtSettings.NotBeforeMinutes),
+                Expires = DateTime.Now.AddMinutes(_siteSetting.JwtSettings.ExpirationMinutes),
+                SigningCredentials = signingCredentials,
+                EncryptingCredentials = encryptingCredentials,
+                Subject = new ClaimsIdentity(claims)
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var securityToken = tokenHandler.CreateToken(descriptor);
+
+            var jwt = tokenHandler.WriteToken(securityToken);
+
+            return jwt;
+        }
+
         private async Task<IEnumerable<Claim>> _getClaimsAsync(User user)
         {
             var result = await signInManager.ClaimsFactory.CreateAsync(user);
@@ -81,7 +112,7 @@ namespace Services
             //    new Claim(ClaimTypes.Name, user.UserName),
             //    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             //    new Claim(ClaimTypes.MobilePhone, "09123456987"),
-            //  new Claim(securityStampClaimType, user.SecurityStamp.ToString())
+            //    new Claim(securityStampClaimType, user.SecurityStamp.ToString())
             //};
 
             //var roles = new Role[] { new Role { Name = "Admin" } };

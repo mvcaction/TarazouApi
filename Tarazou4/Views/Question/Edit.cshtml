@@ -1,0 +1,130 @@
+﻿@model Tarazou4.Entities.Question
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Question</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionCategoryId" class="control-label"></label>
+                <select asp-for="QuestionCategoryId" class="form-control" asp-items="ViewBag.QuestionCategoryId"></select>
+                <span asp-validation-for="QuestionCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionTypeId" class="control-label"></label>
+                <select asp-for="QuestionTypeId" class="form-control" asp-items="ViewBag.QuestionTypeId"></select>
+                <span asp-validation-for="QuestionTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedOnUtc" class="control-label"></label>
+                <input asp-for="CreatedOnUtc" class="form-control" />
+                <span asp-validation-for="CreatedOnUtc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdatedOnUtc" class="control-label"></label>
+                <input asp-for="UpdatedOnUtc" class="form-control" />
+                <span asp-validation-for="UpdatedOnUtc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsPay" /> @Html.DisplayNameFor(model => model.IsPay)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentDate" class="control-label"></label>
+                <input asp-for="PaymentDate" class="form-control" />
+                <span asp-validation-for="PaymentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastStatusId" class="control-label"></label>
+                <select asp-for="LastStatusId" class="form-control" asp-items="ViewBag.LastStatusId"></select>
+                <span asp-validation-for="LastStatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastUpdateTime" class="control-label"></label>
+                <input asp-for="LastUpdateTime" class="form-control" />
+                <span asp-validation-for="LastUpdateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectConsultantId" class="control-label"></label>
+                <select asp-for="SelectConsultantId" class="form-control" asp-items="ViewBag.SelectConsultantId"></select>
+                <span asp-validation-for="SelectConsultantId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Score" class="control-label"></label>
+                <input asp-for="Score" class="form-control" />
+                <span asp-validation-for="Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastAnsweringTime" class="control-label"></label>
+                <input asp-for="LastAnsweringTime" class="form-control" />
+                <span asp-validation-for="LastAnsweringTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Immediate" /> @Html.DisplayNameFor(model => model.Immediate)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="AllowedAnsweringTime" class="control-label"></label>
+                <input asp-for="AllowedAnsweringTime" class="form-control" />
+                <span asp-validation-for="AllowedAnsweringTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScoreConsultant" class="control-label"></label>
+                <input asp-for="ScoreConsultant" class="form-control" />
+                <span asp-validation-for="ScoreConsultant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

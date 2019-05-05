@@ -41,27 +41,27 @@ namespace Tarazou4.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResult<Question>> Create(Question userDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<Question>> Create(Question questionDto, CancellationToken cancellationToken)
         {
-            //var exists = await userRepository.TableNoTracking.AnyAsync(p => p.UserName == userDto.UserName);
+            //var exists = await userRepository.TableNoTracking.AnyAsync(p => p.UserName == questionDto.UserName);
             //if (exists)
             //    return BadRequest("نام کاربری تکراری است");
 
             var question = new Question
             {
-                Title = userDto.Title,
-                Description = userDto.Description,
-                QuestionCategoryId = userDto.QuestionCategoryId,
-                QuestionTypeId = userDto.QuestionTypeId,
-                Price = userDto.Price,
-                Active = userDto.Active,
-                UserId = userDto.UserId,
-                CreatedOnUtc = userDto.CreatedOnUtc,
-                IsPay = userDto.IsPay,
-                LastStatusId = userDto.LastStatusId,
-                Score = userDto.Score,
-                Immediate = userDto.Immediate,
-                ScoreConsultant = userDto.ScoreConsultant
+                Title = questionDto.Title,
+                Description = questionDto.Description,
+                QuestionCategoryId = questionDto.QuestionCategoryId,
+                QuestionTypeId = questionDto.QuestionTypeId,
+                Price = questionDto.Price,
+                Active = questionDto.Active,
+                UserId = questionDto.UserId,
+                CreatedOnUtc = questionDto.CreatedOnUtc,
+                IsPay = questionDto.IsPay,
+                LastStatusId = questionDto.LastStatusId,
+                Score = questionDto.Score,
+                Immediate = questionDto.Immediate,
+                ScoreConsultant = questionDto.ScoreConsultant
             };
             await questionRepository.AddAsync(question, cancellationToken);
             return question;

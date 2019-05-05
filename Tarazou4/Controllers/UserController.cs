@@ -1,6 +1,5 @@
 ﻿using Data.Repositories;
 using Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -12,7 +11,6 @@ using WebFramework.Filters;
 
 namespace Tarazou4.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiResultFilter]
     [ApiController]

@@ -32,7 +32,7 @@ namespace Data.Repositories
         {
             return Entities.FindAsync(ids, cancellationToken);
         }
-
+        
         public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
         {
             Assert.NotNull(entity, nameof(entity));

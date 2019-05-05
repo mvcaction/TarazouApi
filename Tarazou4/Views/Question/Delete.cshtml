@@ -1,0 +1,135 @@
+﻿@model Tarazou4.Entities.Question
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOnUtc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOnUtc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedOnUtc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedOnUtc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPay)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsPay)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaymentDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastAnsweringTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastAnsweringTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Immediate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Immediate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AllowedAnsweringTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AllowedAnsweringTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ScoreConsultant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ScoreConsultant)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastStatus.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionCategory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QuestionCategory.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QuestionType.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SelectConsultant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SelectConsultant.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
