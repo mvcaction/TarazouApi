@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Tarazou4.Entities;
 using WebFramework.Api;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TarazouMvc.Controllers
 {
@@ -56,7 +57,7 @@ namespace TarazouMvc.Controllers
             return View(question);
         }
 
-        // GET: QuestionsMvc/Create
+        // GET: 
         public async Task<IActionResult> Create()
         {
             var questions = await questioncategoryRepository.TableNoTracking.ToListAsync(cancellationToken);
@@ -68,7 +69,7 @@ namespace TarazouMvc.Controllers
             return View();
         }
 
-        // POST: QuestionsMvc/Create
+        // POST: /Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]

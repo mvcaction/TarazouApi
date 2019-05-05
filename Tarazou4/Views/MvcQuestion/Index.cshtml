@@ -3,19 +3,21 @@
 @{
     ViewData["Title"] = "Index";
 }
-    <head>
-  
 
-        <script src="~/Scripts/bootstrap.min.js"></script>
-        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    </head>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/css/site.css" />
 
-<h2>Index</h2>
-<select>
-    @foreach (var item in (List<Tarazou4.Entities.QuestionCategory>)ViewData["heading"])
-    {
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+      asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 
-<option>@item.Name</option>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<div  dir="rtl">
+    
 
-    }
-    </select>
+    <h2 class="form-control">سوالات</h2>
+
+    <a class="form-control" href="@Url.Action("create","MvcQuestion")" title="Modules">پرسش سوال</a>
+    </div>

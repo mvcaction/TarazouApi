@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Tarazou4.Entities.User>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+      asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+
+    <div class="form-control" dir="rtl">
+        <form method="post">
+            <div class="form-group">
+                <label>firstname</label>
+                <input name="FirstName" id="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>lastname</label>
+                <input name="LastName" id="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label>province</label>
+                <select name="ProvinceId" id="ProvinceId" class="form-control">
+                    @foreach (var item in (List<Tarazou4.Entities.Province>)@ViewData["heading"])
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label>Email</label>
+                <input name="Email" id="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>username</label>
+                <input name="UserName" id="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input name="Password" id="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="form-group">
+          <label>Mobile</label>
+                <input name="Mobile" id="Mobile" class="form-control" />
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+
+
+
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+
