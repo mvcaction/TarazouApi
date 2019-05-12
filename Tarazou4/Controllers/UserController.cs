@@ -1,7 +1,11 @@
-﻿using Data.Repositories;
+﻿using Common.Exceptions;
+using Data.Repositories;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Services;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,13 +22,39 @@ namespace Tarazou4.Controllers
     {
 
         private readonly IUserRepository userRepository;
+        private readonly IJwtService jwtService;
 
-        public UserController(IUserRepository userRepository)
+
+        public UserController(IUserRepository userRepository, IJwtService jwtService)
         {
             this.userRepository = userRepository;
-        }
+            this.jwtService = jwtService;
 
+
+
+        }
+        [HttpGet("[action]")]
+        public async Task <string> token(string username,string password, CancellationToken cancellationToken)
+        {
+
+        var user=  await  userRepository.GetByUserAndPass(username,password, cancellationToken);
+            if (user==null)
+            
+                throw new BadRequestException("تام کاربززس اشتلاهه است");
+
+           var jwt= jwtService.Generate(user);
+            return jwt;
+
+
+
+
+
+
+
+        }
         [HttpGet]
+      [Authorize]
+
         public async Task<ActionResult<List<User>>> Get(CancellationToken cancellationToken)
         {
             var users = await userRepository.TableNoTracking.ToListAsync(cancellationToken);
@@ -39,7 +69,8 @@ namespace Tarazou4.Controllers
                 return NotFound();
             return user;
         }
-
+      
+        [Authorize]
         [HttpPost]
         public async Task<ApiResult<User>> Create(User userDto, CancellationToken cancellationToken)
         {
@@ -50,18 +81,18 @@ namespace Tarazou4.Controllers
             var user = new User
             {
                 Guid = userDto.Guid,
-                Username=userDto.Username,
+                Username = userDto.Username,
                 FirstName = userDto.FirstName,
                 Mobile = userDto.Mobile,
                 MobileVerificationCode = userDto.MobileVerificationCode,
-               LastName=userDto.LastName,
-               Password=userDto.Password,
-               PasswordSalt=userDto.PasswordSalt,
-               ProvinceId=userDto.ProvinceId,
-               IsVerify=userDto.IsVerify,
-               Credit=userDto.Credit,
-               CreatedOnUtc=userDto.CreatedOnUtc,
-               Active=userDto.Active
+                LastName = userDto.LastName,
+                Password = userDto.Password,
+                PasswordSalt = userDto.PasswordSalt,
+                ProvinceId = userDto.ProvinceId,
+                IsVerify = userDto.IsVerify,
+                Credit = userDto.Credit,
+                CreatedOnUtc = userDto.CreatedOnUtc,
+                Active = userDto.Active
             };
             await userRepository.AddAsync(user, userDto.Password, cancellationToken);
             return user;

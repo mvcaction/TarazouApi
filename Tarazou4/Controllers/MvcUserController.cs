@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Exceptions;
+
 using Data.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Tarazou4.Entities;
 
+using Tarazou4.Entities;
 namespace Tarazou4.Controllers
 {
     public class MvcUserController : Controller
@@ -155,7 +158,9 @@ new Province {Id=31,Name="یزد" },
             catch
             {
                 return View();
+               
             }
         }
+       
     }
 }

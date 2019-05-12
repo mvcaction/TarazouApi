@@ -20,7 +20,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Services;
 using Tarazou4.Data;
-using WebFramework;
 using WebFramework.Configuration;
 using WebFramework.Middlewares;
 
@@ -59,7 +58,7 @@ namespace Tarazou4
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IJwtService, JwtService>();
 
-              services.AddJwtAuthentication();
+            //  services.AddJwtAuthentication(_siteSetting.JwtSettings);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
