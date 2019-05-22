@@ -19,7 +19,7 @@ namespace WebFramework
     public static class ServiceCollectionExtensions
     {
         public static void AddJwtAuthentication(this IServiceCollection services)
-        {
+      {
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

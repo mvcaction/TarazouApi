@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Exceptions;
@@ -101,7 +102,21 @@ new Province {Id=31,Name="یزد" },
                 CreatedOnUtc = DateTime.Now,
                 Active =true
             };
-            userRepository.AddAsync(user, cancellationToken);
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("https://localhost:44382/api/user");
+
+                    //HTTP POST
+                    var postTask = client.PostAsJsonAsync<User>("https://localhost:44382/api/user",user);
+                    postTask.Wait();
+
+                    var result = postTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+
 
             try
             {

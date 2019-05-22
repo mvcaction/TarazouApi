@@ -70,7 +70,7 @@ namespace Tarazou4.Controllers
             return user;
         }
       
-        [Authorize]
+       // [Authorize]
         [HttpPost]
         public async Task<ApiResult<User>> Create(User userDto, CancellationToken cancellationToken)
         {

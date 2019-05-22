@@ -11,6 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using Tarazou4.Entities;
 using WebFramework.Api;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace TarazouMvc.Controllers
 {
@@ -19,7 +23,7 @@ namespace TarazouMvc.Controllers
         CancellationToken cancellationToken;
         private readonly IQuestionRepository questionRepository;
         private readonly IQuestionCategoryRepository questioncategoryRepository;
-
+        private string baseurl = "https://localhost:44382/api/question";
 
         public MvcQuestionController(IQuestionRepository questionRepository, IQuestionCategoryRepository questionCategoryRepository)
         {
@@ -73,29 +77,43 @@ namespace TarazouMvc.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        
         public ActionResult  Create( Question questionDto)
         {
             if (ModelState.IsValid)
             {
-
                 var question = new Question
                 {
                     Title = questionDto.Title,
                     Description = questionDto.Description,
                     QuestionCategoryId = questionDto.QuestionCategoryId,
-                    QuestionTypeId =2,
-                    Price=200,
+                    QuestionTypeId = 2,
+                    Price = 200,
                     Active = true,
                     UserId = 10,
                     CreatedOnUtc = DateTime.Now,
                     IsPay = true,
                     LastStatusId = 2,
                     Score = 22,
-                    Immediate =true,
-                    ScoreConsultant =3
+                    Immediate = true,
+                    ScoreConsultant = 3
                 };
-                 questionRepository.AddAsync(question, cancellationToken);
-                return RedirectToAction("Index");
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("https://localhost:44382/api/question");
+
+                    //HTTP POST
+                    var postTask = client.PostAsJsonAsync<Question>("https://localhost:44382/api/question", question);
+                    postTask.Wait();
+
+                    var result = postTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+
             }
 
             //ViewData["LastStatusId"] = new SelectList(_context.QuestionStatus, "Id", "Name", question.LastStatusId);
